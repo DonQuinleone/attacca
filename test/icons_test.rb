@@ -15,10 +15,16 @@ class IconsTest < Minitest::Test
   end
 
   def test_colour_mode_falls_back_to_mono_where_there_is_no_colour_icon
+    pair = Attacca::Icons.for_store(store("idagio"), :colour)
+
+    assert_equal "/assets/attacca/icons/mono-black/idagio.svg", pair.light
+    assert_equal "/assets/attacca/icons/mono-white/idagio.svg", pair.dark
+  end
+
+  def test_itunes_has_its_colour_star
     pair = Attacca::Icons.for_store(store("itunes"), :colour)
 
-    assert_equal "/assets/attacca/icons/mono-black/itunes.svg", pair.light
-    assert_equal "/assets/attacca/icons/mono-white/itunes.svg", pair.dark
+    assert_equal "/assets/attacca/icons/colour/itunes.png", pair.light
   end
 
   def test_mono_mode_uses_black_on_light_and_white_on_dark

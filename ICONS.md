@@ -6,7 +6,7 @@ Fetched on 2026-10-19 and 2026-10-20. Each mark belongs to its provider and is u
 |---|---|---|---|---|
 | `apple_music` | Apple_Music_Icon_RGB_sm | blk_sm / wht_sm | Apple Music identity kit, apple.co/am-icon-2020 (Box) | https://marketing.services.apple/apple-music-identity-guidelines |
 | `apple_music_classical` | Apple_Music_Classical_Icon_RGB_sm | blk_sm / wht_sm | apple.co/amclassical-icon (Box) | Same page, section 4.9 |
-| `itunes` | none in the kit (PSD only) | iTunes_Store_icon_blk / wht | apple.com itunes-store-icon.zip | https://marketing.services.apple/itunes-identity-guidelines |
+| `itunes` | iTunes_Store_Icon.psd, rendered to a 192 px PNG | iTunes_Store_icon_blk / wht | apple.com itunes-store-icon.zip | https://marketing.services.apple/itunes-identity-guidelines |
 | `spotify` | Primary_Logo_Green_RGB | Primary_Logo_Black_RGB / White_RGB | developer.spotify.com 2024-spotify-logo-icon.zip | https://developer.spotify.com/documentation/design |
 | `amazon_music` | AM_App_Tile_Cyan_Charcoal_Rounded | AM_App_Tile_White_Charcoal_Rounded / Charcoal_White_Rounded | Amazon Music brand kit, AM Logos/Amazon_Music_Tiles (Box) | https://artists.amazonmusic.com/brand-guidelines |
 | `deezer` | site icon, 240 px PNG | none | cdn-files.dzcdn.net favicon set | https://deezerbrand.com/ (login needed for the kit) |
