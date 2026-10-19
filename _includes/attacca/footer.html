@@ -1,0 +1,7 @@
+{%- assign a = site.data.attacca -%}
+<footer class="attacca-footer">
+  <span class="attacca-label">{{ a.site_name | escape }}{% if include.catalogue %} · {{ include.catalogue | escape }}{% endif %}</span>
+  {%- if a.attribution %}
+  <a class="attacca-attribution" href="https://github.com/DonQuinleone/attacca">Powered by {% include attacca/mark.svg %}<span class="attacca-attribution-name">attacca</span></a>
+  {%- endif %}
+</footer>

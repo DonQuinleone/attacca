@@ -1,0 +1,14 @@
+{%- assign a = site.data.attacca -%}
+<header class="attacca-header">
+  {%- capture home %}{{ a.home_url | default: '/' }}{% endcapture -%}
+  {%- if a.logo %}
+  <a class="attacca-logo" href="{{ home | escape }}">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="{{ a.logo.dark | relative_url }}">
+      <img src="{{ a.logo.light | relative_url }}" alt="{{ a.logo.alt | escape }}" width="{{ a.logo.width }}">
+    </picture>
+  </a>
+  {%- elsif a.site_name != "" %}
+  <a class="attacca-wordmark" href="{{ home | escape }}">{{ a.site_name | escape }}</a>
+  {%- endif %}
+</header>

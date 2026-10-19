@@ -1,0 +1,19 @@
+{%- assign a = site.data.attacca -%}
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+{% include attacca/head.html title=a.site_name %}
+{%- if a.home_url %}
+<meta http-equiv="refresh" content="0; url={{ a.home_url | escape }}">
+<link rel="canonical" href="{{ a.home_url | escape }}">
+{%- endif %}
+</head>
+<body class="attacca">
+{% include attacca/header.html %}
+<main class="attacca-main attacca-notice">
+  {%- if a.home_url %}
+  <p><a href="{{ a.home_url | escape }}">Continue to {{ a.site_name | default: a.home_url | escape }}</a></p>
+  {%- endif %}
+</main>
+</body>
+</html>

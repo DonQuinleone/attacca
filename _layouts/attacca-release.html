@@ -1,0 +1,96 @@
+{%- assign r = page.attacca_release -%}
+{%- assign a = site.data.attacca -%}
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+{% include attacca/head.html title=r.page_title %}
+<meta name="description" content="{{ r.meta_description | escape }}">
+<link rel="canonical" href="{{ r.canonical_url }}">
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="{{ r.page_title | escape }}">
+<meta property="og:description" content="{{ r.meta_description | escape }}">
+<meta property="og:url" content="{{ r.canonical_url }}">
+<meta property="og:image" content="{{ r.og_image | escape }}">
+{%- if r.og_size %}
+<meta property="og:image:width" content="{{ r.og_size.width }}">
+<meta property="og:image:height" content="{{ r.og_size.height }}">
+{%- endif %}
+{%- if a.site_name != "" %}
+<meta property="og:site_name" content="{{ a.site_name | escape }}">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="attacca">
+{% include attacca/header.html %}
+<main class="attacca-main">
+  <div class="attacca-art">
+    <img src="{{ r.artwork.src | relative_url }}"{% if r.artwork.srcset != "" %} srcset="{{ r.artwork.srcset }}" sizes="(min-width: 760px) 300px, calc(100vw - 48px)"{% endif %} alt="Cover of {{ r.title | escape }}" width="600" height="600" fetchpriority="high">
+  </div>
+  <div class="attacca-detail">
+    <div class="attacca-heading">
+      {%- if r.eyebrow != "" %}
+      <p class="attacca-label">{{ r.eyebrow | escape }}</p>
+      {%- endif %}
+      <h1 class="attacca-title">{{ r.title | escape }}</h1>
+    </div>
+    {%- if r.composers.size > 0 or r.performers.size > 0 %}
+    <dl class="attacca-credits">
+      {%- if r.composers.size > 0 %}
+      <div>
+        <dt class="attacca-label">{{ r.composer_label }}</dt>
+        {%- for name in r.composers %}
+        <dd>{{ name | escape }}</dd>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+      {%- if r.performers.size > 0 %}
+      <div>
+        <dt class="attacca-label">{{ r.performer_label }}</dt>
+        {%- for p in r.performers %}
+        <dd>{{ p.name | escape }}{% if p.role %}<span class="attacca-role">, {{ p.role | escape }}</span>{% endif %}</dd>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+    </dl>
+    {%- endif %}
+    {%- if r.description_html != "" %}
+    <div class="attacca-description">{{ r.description_html }}</div>
+    {%- endif %}
+    <section class="attacca-section" aria-labelledby="attacca-stores">
+      <h2 id="attacca-stores" class="attacca-label">Listen and buy</h2>
+      <ul class="attacca-rows">
+        {%- for l in r.links %}
+        <li>
+          <a class="attacca-row" href="{{ l.url | escape }}" rel="noopener">
+            <picture class="attacca-icon">
+              {%- if l.icon_differs %}<source media="(prefers-color-scheme: dark)" srcset="{{ l.icon_dark | relative_url }}">{% endif %}
+              <img src="{{ l.icon_light | relative_url }}" alt="" width="28" height="28">
+            </picture>
+            <span class="attacca-row-name">{{ l.name | escape }}</span>
+            <span class="attacca-row-verb">{{ l.verb | escape }}<svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><path d="M6 3l5 5-5 5"/></svg></span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- if r.extras.size > 0 %}
+    <section class="attacca-section" aria-labelledby="attacca-extras">
+      <h2 id="attacca-extras" class="attacca-label">More from this release</h2>
+      <ul class="attacca-rows">
+        {%- for e in r.extras %}
+        <li>
+          <a class="attacca-row" href="{{ e.url | escape }}" rel="noopener">
+            {% include attacca/extra-icon.html kind=e.kind %}
+            <span class="attacca-row-name">{{ e.name | escape }}{% if e.detail %}<span class="attacca-row-detail">{{ e.detail | escape }}</span>{% endif %}</span>
+            <span class="attacca-row-verb"><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14"><path d="M6 3l5 5-5 5"/></svg></span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+  </div>
+</main>
+{% include attacca/footer.html catalogue=r.catalogue %}
+</body>
+</html>

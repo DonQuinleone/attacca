@@ -1,0 +1,15 @@
+title: Test label links
+url: https://links.example.com
+theme: attacca
+plugins:
+  - attacca
+
+attacca:
+  site_name: Test label
+  home_url: https://example.com/
+  store_order: [presto, label_shop, spotify]
+  custom_links:
+    label_shop:
+      name: Label shop
+      verb: Buy the CD
+      icon: /icons/shop.svg

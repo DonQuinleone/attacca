@@ -1,0 +1,29 @@
+title: Example label links
+url: https://links.example.com
+lang: en-GB
+theme: attacca
+plugins:
+  - attacca
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+
+attacca:
+  site_name: Example Label
+  home_url: https://example.com/
+  icons: colour
+  attribution: true
+  store_order:
+    - apple_music_classical
+    - presto
+    - spotify
+    - idagio
+    - qobuz
+    - tidal
+    - label_shop
+  custom_links:
+    label_shop:
+      name: Label shop
+      verb: Buy the CD
+      icon: /icons/shop.svg

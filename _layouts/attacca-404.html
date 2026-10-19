@@ -1,0 +1,26 @@
+{%- assign a = site.data.attacca -%}
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
+<head>
+{% include attacca/head.html title="Link not found" script=true %}
+<script>
+(function () {
+  var path = window.location.pathname;
+  var lower = path.toLowerCase();
+  if (path !== lower) {
+    window.location.replace(lower + window.location.search + window.location.hash);
+  }
+})();
+</script>
+</head>
+<body class="attacca">
+{% include attacca/header.html %}
+<main class="attacca-main attacca-notice">
+  <h1 class="attacca-title">This link isn't here</h1>
+  <p>Check the address, or ask whoever shared it for a new one.</p>
+  {%- if a.home_url %}
+  <p><a href="{{ a.home_url | escape }}">Go to {{ a.site_name | default: a.home_url | escape }}</a></p>
+  {%- endif %}
+</main>
+</body>
+</html>

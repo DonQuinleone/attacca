@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install --yes --no-install-recommends imagemagick
+      - uses: ruby/setup-ruby@824c0e29fdfc7d689c191c27acc969d2d04b7dd8 # v1.331.0
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+      - name: Test
+        run: bundle exec rake test
+      - name: Build the example site
+        working-directory: example
+        env:
+          BUNDLE_GEMFILE: ${{ github.workspace }}/example/Gemfile
+          JEKYLL_ENV: production
+        run: |
+          bundle install
+          bundle exec jekyll build

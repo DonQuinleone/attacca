@@ -1,0 +1,21 @@
+{%- assign a = site.data.attacca -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' {{ a.fonts.origins }}; font-src 'self' {{ a.fonts.origins }}; script-src {% if include.script %}'unsafe-inline'{% else %}'none'{% endif %}; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="{{ a.colours.light.ground }}">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{ a.colours.dark.ground }}">
+<title>{{ include.title | escape }}</title>
+{%- if a.fonts.stylesheet %}
+{%- if a.fonts.origins contains "fonts.gstatic.com" %}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{%- endif %}
+<link rel="stylesheet" href="{{ a.fonts.stylesheet | escape }}">
+{%- endif %}
+<link rel="stylesheet" href="{{ '/assets/attacca/attacca.css' | relative_url }}">
+<style>
+:root{--ground:{{ a.colours.light.ground }};--ink:{{ a.colours.light.ink }};--ink2:{{ a.colours.light.ink2 }};--caption:{{ a.colours.light.caption }};--rule:{{ a.colours.light.rule }};--accent:{{ a.colours.light.accent }};--font-display:{{ a.fonts.display }};--font-text:{{ a.fonts.text }};--font-label:{{ a.fonts.label }}}
+@media (prefers-color-scheme: dark){:root{--ground:{{ a.colours.dark.ground }};--ink:{{ a.colours.dark.ink }};--ink2:{{ a.colours.dark.ink2 }};--caption:{{ a.colours.dark.caption }};--rule:{{ a.colours.dark.rule }};--accent:{{ a.colours.dark.accent }}}}
+</style>
