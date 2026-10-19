@@ -17,7 +17,7 @@ module Attacca
     ["presto", "Presto Music", "Buy", "svg", nil, "svg"],
     ["qobuz", "Qobuz", "Buy", "svg", nil, nil],
     ["idagio", "IDAGIO", "Play", nil, "svg", "svg"],
-    ["itunes", "iTunes", "Buy", nil, "svg", "svg"],
+    ["itunes", "iTunes", "Buy", "png", "svg", "svg"],
     ["amazon_music", "Amazon Music", "Play", "svg", "svg", "svg"],
     ["deezer", "Deezer", "Play", "png", nil, nil],
     ["tidal", "TIDAL", "Play", nil, "png", "png"],
