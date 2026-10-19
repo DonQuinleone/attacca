@@ -38,8 +38,8 @@
       {%- if r.composers.size > 0 %}
       <div>
         <dt class="attacca-label">{{ r.composer_label }}</dt>
-        {%- for name in r.composers %}
-        <dd>{{ name | escape }}</dd>
+        {%- for c in r.composers %}
+        <dd>{{ c.name | escape }}{% if c.role %}<span class="attacca-role">, {{ c.role | escape }}</span>{% endif %}</dd>
         {%- endfor %}
       </div>
       {%- endif %}

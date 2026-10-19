@@ -94,14 +94,21 @@ module Attacca
     end
 
     def composers
-      Array(@data["composers"]).filter_map { |name| Checks.text(name) }
+      people("composers")
     end
 
     def performers
-      Array(@data["performers"]).each_with_index.filter_map do |entry, index|
+      people("performers")
+    end
+
+    # Each entry is a name, or a map of name and an optional role such as
+    # arranger, conductor or soprano.
+    def people(field)
+      Array(@data[field]).each_with_index.filter_map do |entry, index|
         entry = { "name" => entry } if entry.is_a?(String)
-        name = Checks.text(entry.is_a?(Hash) ? entry["name"] : nil)
-        @errors << "performers.#{index + 1}.name is required" if name.nil?
+        entry = {} unless entry.is_a?(Hash)
+        name = Checks.text(entry["name"])
+        @errors << "#{field}.#{index + 1}.name is required" if name.nil?
         name && Person.new(name, Checks.text(entry["role"]))
       end
     end

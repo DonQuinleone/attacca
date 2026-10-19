@@ -43,9 +43,9 @@ module Attacca
         "slug" => release.slug,
         "title" => release.title,
         "eyebrow" => [release.type, release.released&.strftime(config.date_format)].compact.join(" · "),
-        "composers" => release.composers,
+        "composers" => people(release.composers),
         "composer_label" => release.composers.size == 1 ? "Composer" : "Composers",
-        "performers" => release.performers.map { |p| { "name" => p.name, "role" => p.role } },
+        "performers" => people(release.performers),
         "performer_label" => release.performers.size == 1 ? "Performer" : "Performers",
         "links" => release.links.map { |l| link(l) },
         "extras" => release.extras.map { |e| { "name" => e.name, "detail" => e.detail, "kind" => e.kind, "url" => e.url } },
@@ -55,9 +55,13 @@ module Attacca
         "canonical_url" => canonical,
         "og_image" => "#{base_url}#{art['og']}",
         "og_size" => derived_artwork ? { "width" => Artwork::OG_WIDTH, "height" => Artwork::OG_HEIGHT } : nil,
-        "page_title" => [release.title, release.composers.join(", ")].reject(&:empty?).join(" · "),
+        "page_title" => [release.title, release.composers.map(&:name).join(", ")].reject(&:empty?).join(" · "),
         "meta_description" => meta_description(release)
       }
+    end
+
+    def people(people)
+      people.map { |p| { "name" => p.name, "role" => p.role } }
     end
 
     def link(link)
@@ -77,7 +81,7 @@ module Attacca
     end
 
     def meta_description(release)
-      by = (release.composers + release.performers.map(&:name)).first(3).join(", ")
+      by = (release.composers + release.performers).map(&:name).first(3).join(", ")
       stores = release.links.first(4).map(&:name).join(", ")
       [release.title, by.empty? ? nil : "by #{by}"].compact.join(" ") + ". Listen on #{stores}."
     end
