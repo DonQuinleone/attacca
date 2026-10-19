@@ -12,8 +12,22 @@ class ReleaseTest < Minitest::Test
     assert_equal "Lanterns at Compline", release.title
     assert_equal "lanterns-at-compline", release.slug
     assert_equal "Album", release.type
-    assert_equal ["Edith Larkspur"], release.composers
+    assert_equal ["Edith Larkspur"], release.composers.map(&:name)
     assert_equal "conductor", release.performers.first.role
+  end
+
+  def test_gives_a_composer_an_optional_role_such_as_arranger
+    composers = ["Howard Goodall", { "name" => "Joanna Marsh", "role" => "arranger" }]
+
+    release = parse_release(release_data("composers" => composers))
+
+    assert_equal [["Howard Goodall", nil], ["Joanna Marsh", "arranger"]], release.composers.map { |c| [c.name, c.role] }
+  end
+
+  def test_requires_a_name_for_every_composer
+    error = assert_raises(Attacca::ReleaseError) { parse_release(release_data("composers" => [{ "role" => "arranger" }])) }
+
+    assert_match(/composers.1.name is required/, error.message)
   end
 
   def test_keeps_the_casing_of_an_explicit_slug
@@ -26,7 +40,7 @@ class ReleaseTest < Minitest::Test
   def test_accepts_a_single_composer_as_a_string
     release = parse_release(release_data("composers" => "Edith Larkspur"))
 
-    assert_equal ["Edith Larkspur"], release.composers
+    assert_equal ["Edith Larkspur"], release.composers.map(&:name)
   end
 
   def test_accepts_a_date_or_an_iso_string_for_released

@@ -27,6 +27,16 @@ class PresenterTest < Minitest::Test
     assert_equal({ "width" => 1200, "height" => 630 }, data["og_size"])
   end
 
+  def test_presents_composers_with_their_roles_and_titles_the_page_by_name
+    data = Attacca::Presenter.release(
+      parse_release(release_data("composers" => [{ "name" => "Howard Goodall", "role" => "arranger" }])),
+      config, base_url: "https://links.example.com", description_html: "", derived_artwork: true
+    )
+
+    assert_equal [{ "name" => "Howard Goodall", "role" => "arranger" }], data["composers"]
+    assert_equal "Lanterns at Compline · Howard Goodall", data["page_title"]
+  end
+
   def test_uses_the_source_cover_when_artwork_cannot_be_resized
     data = Attacca::Presenter.release(parse_release(release_data), config, base_url: "https://links.example.com",
                                                                            description_html: "", derived_artwork: false)

@@ -72,7 +72,10 @@ type: Album                  # optional; Album by default
 released: 2026-11-20         # optional; YYYY-MM-DD
 catalogue: LBL 001           # optional; shown in the footer
 artwork: /artwork/lanterns-at-compline.jpg
-composers: [Edith Larkspur]
+composers:
+  - Edith Larkspur
+  - name: Ralph Ashdown         # a composer may take a role, as a performer does
+    role: arranger
 performers:
   - name: The Larkhill Consort
   - name: Rosalind Avery
@@ -94,6 +97,7 @@ Seven settings of the evening office for unaccompanied voices.
 Rules the build enforces:
 
 - `title`, `artwork` and at least one link are required.
+- Composers and performers are each a name, or a `name` with an optional `role` (arranger, conductor, soprano). Keep arrangements out of the title: put the arranger under `composers` with `role: arranger`.
 - Every link must be an `https` address; an extra may also be a path on the site.
 - A slug may contain only letters, digits, hyphens and underscores, and two releases may not share a slug in any casing.
 - Use a square cover of at least 1200 px. Only the resized copies are published, never the original file.

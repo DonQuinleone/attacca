@@ -6,7 +6,7 @@ All notable changes are recorded here, in the shape of [Keep a Changelog](https:
 
 ### Added
 
-- Release pages with composers, performers and roles, a description, store rows and optional extras.
+- Release pages with composers and performers, each with an optional role such as arranger or conductor, a description, store rows and optional extras.
 - Official store icons in colour and mono, with light and dark themes.
 - Custom links, a configurable store order and a switchable attribution line.
 - Resized covers and a social preview image, made with ImageMagick.
